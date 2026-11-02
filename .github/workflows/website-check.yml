@@ -1,0 +1,30 @@
+name: LL Brown website checks
+
+on:
+  push:
+    paths:
+      - 'public/**'
+      - 'tests/**'
+      - 'package.json'
+      - 'wrangler.jsonc'
+      - '.github/workflows/website-check.yml'
+  pull_request:
+    paths:
+      - 'public/**'
+      - 'tests/**'
+      - 'package.json'
+      - 'wrangler.jsonc'
+      - '.github/workflows/website-check.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm test
